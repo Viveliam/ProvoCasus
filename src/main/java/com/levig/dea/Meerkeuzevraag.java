@@ -1,7 +1,11 @@
 package com.levig.dea;
 
 public class Meerkeuzevraag extends Vraag {
-    public Meerkeuzevraag(String vraag) {
+
+    private Antwoord juistAntwoord;
+
+    public Meerkeuzevraag(String vraag, String antwoord) {
         super(vraag);
+        juistAntwoord = new Antwoord(antwoord);
     }
 }
