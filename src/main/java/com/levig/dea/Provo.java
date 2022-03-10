@@ -6,19 +6,10 @@ import java.util.ArrayList;
 
 public class Provo {
 	private ArrayList<Account> accounts = new ArrayList<>();
-	private ArrayList<Deelnemer> deelnemers = new ArrayList<>();
+	private ArrayList<Deelnemer> actieveDeelnemers = new ArrayList<>();
 
 	public void voerGegevensIn(String mailadres, String voornaam, String achternaam, String wachtwoord, String organisatie, String accounttype) {
 		accounts.add(new Account(mailadres, voornaam, achternaam, wachtwoord, organisatie, accounttype));
-	}
-
-	public Account getAccount(String mailadres) {
-		for (Account account: accounts) {
-			if (account.getMailadres() == mailadres) {
-				return account;
-			}
-		}
-		return null; // TODO: Exception maken wanneer account niet gevonden wordt.
 	}
 
 	public void pasGegevensAan(String mailadres, String voornaam, String achternaam, String wachtwoord, String organisatie, String accounttype) {
@@ -45,30 +36,55 @@ public class Provo {
 		a.voegAntwoordToe(naamToets, vraagNr, antwoord);
 	}
 
-	public void startKennisToets(String naamToets, int lokaalNr) {
-
+	public void startKennisToets(String mailadres, String naamToets, int lokaalNr) {
+		Account a = getAccount(mailadres);
+		a.startKennisToets(naamToets);
 	}
 
-	public void maakOverzicht(int lokaalNr) {
-
+	public void maakOverzicht(String mailadres) {
+		Account a = getAccount(mailadres);
+		a.maakOverzicht();
 	}
 
 	public void joinLokaal(String docentCode, String studentNaam, int lokaalNr) {
-
+		Account d = getDocent(docentCode);
+		d.joinLokaal(studentNaam, lokaalNr);
 	}
 
-	public void beantwoordVraag(int vraagNr, String antwoord) {
-
+	public void beantwoordVraag(String studentID, int vraagNr, String antwoord) {
+		Deelnemer student = getStudent(studentID);
+		student.beantwoordVraag(vraagNr, antwoord);
 	}
 
 	public void bekijkResultaat() {
 
 	}
 
+	public Account getAccount(String mailadres) {
+		for (Account account: accounts) {
+			if (account.getMailadres() == mailadres) {
+				return account;
+			}
+		}
+		return null; // TODO: Exception maken wanneer account niet gevonden wordt.
+	}
 
+	private Account getDocent(String docentcode) {
+		for (Account account: accounts) {
+			if (account.getDocentcode() == docentcode) {
+				return account;
+			}
+		}
+		return null; // TODO: Exception maken wanneer account niet gevonden wordt.
+	}
 
-	public void voegVraagToe(String soortVraag, String antwoord) {
-
+	private Deelnemer getStudent(String studentID){
+		for (Deelnemer student : actieveDeelnemers) {
+			if (student.getStudentID() == studentID) {
+				return student;
+			}
+		}
+		return null; // TODO: Exception maken wanneer student niet gevonden wordt.
 	}
 
 }

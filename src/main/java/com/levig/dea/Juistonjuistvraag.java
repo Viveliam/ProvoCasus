@@ -8,4 +8,10 @@ public class Juistonjuistvraag extends Vraag {
         super(vraag);
         juistAntwoord = new Antwoord(antwoord);
     }
+
+    public boolean controleerAntwoord(String antwoord) {
+        if (antwoord == juistAntwoord.getAntwoord()) {
+            return true;
+        } return false;
+    }
 }

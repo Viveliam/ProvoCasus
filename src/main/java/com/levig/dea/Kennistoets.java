@@ -36,4 +36,8 @@ public class Kennistoets {
 		Kortantwoordvraag v = (Kortantwoordvraag) vragen.get(vraagNr); // TODO: Controleren of gekregen vraag wel een kortantwoordvraag is.
 		v.voegAntwoordToe(antwoord);
 	}
+
+	public Vraag getVraag(int vraagNr) {
+		return vragen.get(vraagNr);
+	}
 }

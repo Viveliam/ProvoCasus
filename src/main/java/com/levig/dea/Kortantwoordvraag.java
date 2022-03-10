@@ -14,4 +14,13 @@ public class Kortantwoordvraag extends Vraag {
     public void voegAntwoordToe(String antwoord) {
         juisteAntwoorden.add(new Antwoord(antwoord));
     }
+
+    public boolean controleerAntwoord(String antwoord) {
+        for (Antwoord juistAntwoord : juisteAntwoorden) {
+            if (antwoord == juistAntwoord.getAntwoord()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

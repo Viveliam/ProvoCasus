@@ -8,4 +8,5 @@ public class Vraag {
 		this.vraag = vraag;
 	}
 
+
 }

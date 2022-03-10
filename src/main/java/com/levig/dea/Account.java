@@ -12,6 +12,7 @@ public class Account {
 	private String accounttype;
 	private String docentcode;
 	private ArrayList<Kennistoets> kennistoetsen;
+	private ArrayList<Lokaal> lokalen;
 
 	public Account(String mailadres, String voornaam, String achternaam, String wachtwoord, String organisatie, String accounttype) {
 		this.mailadres = mailadres;
@@ -22,12 +23,12 @@ public class Account {
 		this.accounttype = accounttype;
 		this.docentcode = genereerDocentCode();
 		kennistoetsen = new ArrayList<>();
+		lokalen = new ArrayList<>();
 	}
 
 	public String genereerDocentCode() {
 		return null;
 	}
-
 
 	public void pasGegevensAan(String voornaam, String achternaam, String wachtwoord, String organisatie, String accounttype) {
 		this.voornaam = voornaam;
@@ -68,5 +69,40 @@ public class Account {
 	public void voegAntwoordToe(String naamToets, int vraagNr, String antwoord) {
 		Kennistoets k = getKennistoets(naamToets);
 		k.voegAntwoordToe(vraagNr, antwoord);
+	}
+
+	public void startKennisToets(String naamToets) {
+		Lokaal l = nieuwLokaal();
+		lokalen.add(l);
+		l.startKennisToets(getKennistoets(naamToets));
+	}
+
+	private Lokaal nieuwLokaal(){
+		if (accounttype == "Basis" && lokalen.size() == 0) {
+			return new Lokaal();
+		} else if (accounttype == "Premium" &&  lokalen.size() < 8) {
+			return new Lokaal();
+		}
+		return null; // TODO: Throw exception.
+	}
+
+	public void maakOverzicht() {
+		if (lokalen.size() > 0) {
+			Lokaal l = lokalen.get(0);
+			l.maakOverzicht();
+		}
+	}
+
+	public void joinLokaal(String studentNaam, int lokaalNr) {
+		Lokaal l = getLokaal(lokaalNr);
+		l.joinLokaal(studentNaam);
+	}
+
+	public String getDocentcode() {
+		return docentcode;
+	}
+
+	private Lokaal getLokaal(int lokaalNr) {
+		return lokalen.get(lokaalNr);
 	}
 }
