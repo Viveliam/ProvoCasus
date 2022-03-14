@@ -17,15 +17,28 @@ public class Lokaal {
 
 	public void maakOverzicht() {
 		for (Deelnemer d : deelnemers) {
-			System.out.println("Student: " + d.getStudentnaam() + " aantal correct = " + d.getAantalCorrect() + "Score" + d.getPunten());
+			d.printResultaat();
 		}
 	}
 
-	public void joinLokaal(String studentNaam) {
-		deelnemers.add(new Deelnemer(studentNaam, this));
+	public void joinLokaal(String studentNaam, Provo provo) {
+		deelnemers.add(new Deelnemer(studentNaam, this, provo));
 	}
 
 	public Vraag getVraag(int vraagNr) {
 		return kennistoets.getVraag(vraagNr);
 	}
+
+	public void toonVraag(int vraagNr) {
+		kennistoets.toonVraag(vraagNr);
+	}
+
+	public String getStudentID(String studentNaam) {
+		for (Deelnemer deelnemer : deelnemers) {
+			if (deelnemer.getNaam() == studentNaam){
+				return deelnemer.getStudentID();
+			}
+		} return ""; // TODO: Throw exception.
+	}
+
 }

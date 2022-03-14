@@ -1,6 +1,7 @@
 package com.levig.dea;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Account {
 
@@ -13,6 +14,7 @@ public class Account {
 	private String docentcode;
 	private ArrayList<Kennistoets> kennistoetsen;
 	private ArrayList<Lokaal> lokalen;
+	private static AtomicLong idCounter = new AtomicLong();
 
 	public Account(String mailadres, String voornaam, String achternaam, String wachtwoord, String organisatie, String accounttype) {
 		this.mailadres = mailadres;
@@ -27,7 +29,7 @@ public class Account {
 	}
 
 	public String genereerDocentCode() {
-		return null;
+		return String.valueOf(idCounter.getAndIncrement());
 	}
 
 	public void pasGegevensAan(String voornaam, String achternaam, String wachtwoord, String organisatie, String accounttype) {
@@ -48,9 +50,19 @@ public class Account {
 		kennistoetsen.add(new Kennistoets(naamToets, tijdslimiet));
 	}
 
-	public void voegVraagToe(String naamToets, String soortVraag, String vraag, String antwoord) {
+	public void voegVraagToe(String naamToets, String vraag, ArrayList<String> antwoorden, int juistAntwoord) {
 		Kennistoets k = getKennistoets(naamToets);
-		k.voegVraagToe(soortVraag, vraag, antwoord);
+		k.voegVraagToe(vraag, antwoorden, juistAntwoord);
+	}
+
+	public void voegVraagToe(String naamToets, String vraag, ArrayList<String> antwoorden) {
+		Kennistoets k = getKennistoets(naamToets);
+		k.voegVraagToe(vraag, antwoorden);
+	}
+
+	public void voegVraagToe(String naamToets, String vraag, String antwoord) {
+		Kennistoets k = getKennistoets(naamToets);
+		k.voegVraagToe(vraag, antwoord);
 	}
 
 	public String getMailadres(){
@@ -64,11 +76,6 @@ public class Account {
 			}
 		}
 		return null; // TODO: Exception maken wanneer toets niet gevonden wordt.
-	}
-
-	public void voegAntwoordToe(String naamToets, int vraagNr, String antwoord) {
-		Kennistoets k = getKennistoets(naamToets);
-		k.voegAntwoordToe(vraagNr, antwoord);
 	}
 
 	public void startKennisToets(String naamToets) {
@@ -86,16 +93,17 @@ public class Account {
 		return null; // TODO: Throw exception.
 	}
 
-	public void maakOverzicht() {
+	public void maakOverzicht(int lokaalNr) {
 		if (lokalen.size() > 0) {
-			Lokaal l = lokalen.get(0);
+			Lokaal l = lokalen.get(lokaalNr);
+			System.out.println("Docent = " + voornaam + " " + achternaam + " Lokaal = " + lokaalNr);
 			l.maakOverzicht();
 		}
 	}
 
-	public void joinLokaal(String studentNaam, int lokaalNr) {
+	public void joinLokaal(String studentNaam, int lokaalNr, Provo provo) {
 		Lokaal l = getLokaal(lokaalNr);
-		l.joinLokaal(studentNaam);
+		l.joinLokaal(studentNaam, provo);
 	}
 
 	public String getDocentcode() {
@@ -104,5 +112,9 @@ public class Account {
 
 	private Lokaal getLokaal(int lokaalNr) {
 		return lokalen.get(lokaalNr);
+	}
+
+	public String getStudentID(int lokaalNr, String studentNaam) {
+		return lokalen.get(lokaalNr).getStudentID(studentNaam);
 	}
 }

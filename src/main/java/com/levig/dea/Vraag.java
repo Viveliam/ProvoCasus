@@ -2,11 +2,10 @@ package com.levig.dea;
 
 public class Vraag {
 
-	private String vraag;
+	protected String vraag;
 
 	public Vraag(String vraag) {
 		this.vraag = vraag;
 	}
-
 
 }

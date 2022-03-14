@@ -14,4 +14,10 @@ public class Juistonjuistvraag extends Vraag {
             return true;
         } return false;
     }
+
+    public void toonVraag() {
+        System.out.println(vraag);
+        System.out.println("Juist");
+        System.out.println("Onjuist");
+    }
 }

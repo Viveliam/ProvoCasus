@@ -1,17 +1,30 @@
 package com.levig.dea;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class Meerkeuzevraag extends Vraag {
 
-    private Antwoord juistAntwoord;
+    private int juistAntwoord;
+    private ArrayList<Antwoord> antwoorden;
 
-    public Meerkeuzevraag(String vraag, String antwoord) {
+    public Meerkeuzevraag(String vraag, ArrayList<String> antwoorden, int juistAntwoord) {
         super(vraag);
-        juistAntwoord = new Antwoord(antwoord);
+        this.juistAntwoord = juistAntwoord;
+        this.antwoorden = new ArrayList<>();
+        for (String antwoord : antwoorden) {
+            this.antwoorden.add(new Antwoord(antwoord));
+        }
     }
 
     public boolean controleerAntwoord(String antwoord) {
-        if (antwoord == juistAntwoord.getAntwoord()) {
-            return true;
-        } return false;
+        return Objects.equals(antwoord, antwoorden.get(juistAntwoord).getAntwoord());
+    }
+
+    public void toonVraag() {
+        System.out.println(vraag);
+        for (Antwoord antwoord : antwoorden) {
+            antwoord.toonAntwoord();
+        }
     }
 }

@@ -6,13 +6,12 @@ public class Kortantwoordvraag extends Vraag {
 
     private ArrayList<Antwoord> juisteAntwoorden;
 
-    public Kortantwoordvraag(String vraag, String antwoord) {
+    public Kortantwoordvraag(String vraag, ArrayList<String> antwoorden) {
         super(vraag);
-        juisteAntwoorden.add(new Antwoord(antwoord));
-    }
-
-    public void voegAntwoordToe(String antwoord) {
-        juisteAntwoorden.add(new Antwoord(antwoord));
+        juisteAntwoorden = new ArrayList<>();
+        for (String antwoord : antwoorden){
+            juisteAntwoorden.add(new Antwoord(antwoord));
+        }
     }
 
     public boolean controleerAntwoord(String antwoord) {
@@ -22,5 +21,9 @@ public class Kortantwoordvraag extends Vraag {
             }
         }
         return false;
+    }
+
+    public void toonVraag() {
+        System.out.println(vraag);
     }
 }
