@@ -9,16 +9,16 @@ public class Deelnemer {
 	private String studentID;
 	private int aantalCorrect;
 	private int resterendeTijd;
-	private Punt puntenTelling;
+	private PuntenTelling puntenTelling;
 	private Lokaal lokaal;
 	private ArrayList<Antwoord> antwoorden;
 	private static AtomicLong idCounter = new AtomicLong();
 
-	public Deelnemer(String studentNaam, Lokaal lokaal, Provo provo) {
+	public Deelnemer(String studentNaam, Lokaal lokaal, Provo provo, PuntenTelling puntenTelling) {
 		this.studentNaam = studentNaam;
 		this.lokaal = lokaal;
+		this.puntenTelling = puntenTelling;
 		antwoorden = new ArrayList<>();
-		puntenTelling = new Punt(10, 5);
 		genereerStudentID();
 		provo.voegDeelnemerToe(this);
 	}

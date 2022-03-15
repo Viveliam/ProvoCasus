@@ -1,11 +1,11 @@
 package com.levig.dea;
 
-public class Punt {
+public class PuntenTelling {
 
     private int puntenPerCorrectAntwoord;
     private int puntenPerResterendeTijd;
 
-    public Punt(int puntenPerCorrectAntwoord, int puntenPerResterendeTijd){
+    public PuntenTelling(int puntenPerCorrectAntwoord, int puntenPerResterendeTijd){
         this.puntenPerCorrectAntwoord = puntenPerCorrectAntwoord;
         this.puntenPerResterendeTijd = puntenPerResterendeTijd;
     }

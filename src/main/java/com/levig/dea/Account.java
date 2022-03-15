@@ -101,9 +101,9 @@ public class Account {
 		}
 	}
 
-	public void joinLokaal(String studentNaam, int lokaalNr, Provo provo) {
+	public String joinLokaal(String studentNaam, int lokaalNr, Provo provo, PuntenTelling puntenTelling) {
 		Lokaal l = getLokaal(lokaalNr);
-		l.joinLokaal(studentNaam, provo);
+		return l.joinLokaal(studentNaam, provo, puntenTelling);
 	}
 
 	public String getDocentcode() {

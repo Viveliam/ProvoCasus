@@ -36,16 +36,7 @@ public class Kennistoets {
 
 	public void toonVraag(int vraagNr) {
 		Vraag vraag = vragen.get(vraagNr);
-		if (vraag instanceof Juistonjuistvraag){
-			Juistonjuistvraag j = (Juistonjuistvraag) vraag;
-			j.toonVraag();
-		} else if (vraag instanceof Meerkeuzevraag){
-			Meerkeuzevraag m = (Meerkeuzevraag) vraag;
-			m.toonVraag();
-		} else if (vraag instanceof Kortantwoordvraag){
-			Kortantwoordvraag k = (Kortantwoordvraag) vraag;
-			k.toonVraag();
-		}
+		vraag.toonVraag();
 	}
 
 

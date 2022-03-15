@@ -45,10 +45,11 @@ public class ProvoApp {
 
         // Join toets
         String studentNaam = "Klaasjan123";
-        provo.joinLokaal(docentCode, studentNaam, lokaalNr);
-        String studentID = provo.getStudentID(docentCode, lokaalNr, studentNaam);
+        PuntenTelling puntenTelling = new PuntenTelling(10, 5);
+        String studentID = provo.joinLokaal(docentCode, studentNaam, lokaalNr, puntenTelling);
         int vraagNr = 0;
 
+        // Volg toets
         Scanner input = new Scanner(System.in);
         do {
             provo.toonVraag(studentID, vraagNr);

@@ -16,7 +16,12 @@ public class Provo {
 	}
 
 	public void voerBetaalgegevensIn(String bankNaam, String mailadres) {
-		// TODO: Geld incasseren.
+		boolean paymentAccepted = true;
+		if (!paymentAccepted) {
+			Account a = getAccount(mailadres);
+			a.toggleAccountType();
+		} // TODO: Geld incasseren.
+
 	}
 
 	public void maakKennisToetsAan(String mailadres, String naamToets, int tijdslimiet) {
@@ -49,9 +54,9 @@ public class Provo {
 		a.maakOverzicht(lokaalNr);
 	}
 
-	public void joinLokaal(String docentCode, String studentNaam, int lokaalNr) {
+	public String joinLokaal(String docentCode, String studentNaam, int lokaalNr, PuntenTelling puntenTelling) {
 		Account d = getDocent(docentCode);
-		d.joinLokaal(studentNaam, lokaalNr, this);
+		return d.joinLokaal(studentNaam, lokaalNr, this, puntenTelling);
 	}
 
 	public void toonVraag(String studentID, int vraagNr) {
@@ -105,8 +110,4 @@ public class Provo {
 		return a.getDocentcode();
 	}
 
-	public String getStudentID(String docentCode, int lokaalNr, String studentNaam) {
-		Account a = getDocent(docentCode);
-		return a.getStudentID(lokaalNr, studentNaam);
-	}
 }

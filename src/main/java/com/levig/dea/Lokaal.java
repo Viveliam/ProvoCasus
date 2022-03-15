@@ -21,8 +21,10 @@ public class Lokaal {
 		}
 	}
 
-	public void joinLokaal(String studentNaam, Provo provo) {
-		deelnemers.add(new Deelnemer(studentNaam, this, provo));
+	public String joinLokaal(String studentNaam, Provo provo, PuntenTelling puntenTelling) {
+		Deelnemer deelnemer = new Deelnemer(studentNaam, this, provo, puntenTelling);
+		deelnemers.add(deelnemer);
+		return deelnemer.getStudentID();
 	}
 
 	public Vraag getVraag(int vraagNr) {

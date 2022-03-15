@@ -1,11 +1,13 @@
 package com.levig.dea;
 
-public class Vraag {
+public abstract class Vraag {
 
 	protected String vraag;
 
 	public Vraag(String vraag) {
 		this.vraag = vraag;
 	}
+
+	public abstract void toonVraag();
 
 }
