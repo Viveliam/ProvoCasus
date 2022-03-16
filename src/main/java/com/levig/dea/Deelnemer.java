@@ -14,13 +14,12 @@ public class Deelnemer {
 	private ArrayList<Antwoord> antwoorden;
 	private static AtomicLong idCounter = new AtomicLong();
 
-	public Deelnemer(String studentNaam, Lokaal lokaal, Provo provo, PuntenTelling puntenTelling) {
+	public Deelnemer(String studentNaam, Lokaal lokaal, PuntenTelling puntenTelling) {
 		this.studentNaam = studentNaam;
 		this.lokaal = lokaal;
 		this.puntenTelling = puntenTelling;
 		antwoorden = new ArrayList<>();
 		genereerStudentID();
-		provo.voegDeelnemerToe(this);
 	}
 
 	private void genereerStudentID() {

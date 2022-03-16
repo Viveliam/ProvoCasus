@@ -10,13 +10,13 @@ public class Account {
 	private String achternaam;
 	private String wachtwoord;
 	private String organisatie;
-	private String accounttype;
+	private IAccounttypeStrategy accounttype;
 	private String docentcode;
 	private ArrayList<Kennistoets> kennistoetsen;
 	private ArrayList<Lokaal> lokalen;
 	private static AtomicLong idCounter = new AtomicLong();
 
-	public Account(String mailadres, String voornaam, String achternaam, String wachtwoord, String organisatie, String accounttype) {
+	public Account(String mailadres, String voornaam, String achternaam, String wachtwoord, String organisatie, IAccounttypeStrategy accounttype) {
 		this.mailadres = mailadres;
 		this.voornaam = voornaam;
 		this.achternaam = achternaam;
@@ -32,7 +32,7 @@ public class Account {
 		return String.valueOf(idCounter.getAndIncrement());
 	}
 
-	public void pasGegevensAan(String voornaam, String achternaam, String wachtwoord, String organisatie, String accounttype) {
+	public void pasGegevensAan(String voornaam, String achternaam, String wachtwoord, String organisatie, IAccounttypeStrategy accounttype) {
 		this.voornaam = voornaam;
 		this.achternaam = achternaam;
 		this.wachtwoord = wachtwoord;
@@ -41,9 +41,9 @@ public class Account {
 	}
 
 	public void toggleAccountType() {
-		if (accounttype == "Basis"){
-			accounttype = "Premium";
-		} else accounttype = "Basis";
+		if (accounttype instanceof PremiumAccounttypeStrategy){
+			accounttype = new BasisAccounttypeStrategy();
+		} else accounttype = new PremiumAccounttypeStrategy();
 	}
 
 	public void maakKennistoetsAan(String naamToets, int tijdslimiet) {
@@ -79,18 +79,9 @@ public class Account {
 	}
 
 	public void startKennisToets(String naamToets) {
-		Lokaal l = nieuwLokaal();
+		Lokaal l = accounttype.nieuwLokaal(lokalen.size());
 		lokalen.add(l);
 		l.startKennisToets(getKennistoets(naamToets));
-	}
-
-	private Lokaal nieuwLokaal(){
-		if (accounttype == "Basis" && lokalen.size() == 0) {
-			return new Lokaal();
-		} else if (accounttype == "Premium" &&  lokalen.size() < 8) {
-			return new Lokaal();
-		}
-		return null; // TODO: Throw exception.
 	}
 
 	public void maakOverzicht(int lokaalNr) {
@@ -101,9 +92,9 @@ public class Account {
 		}
 	}
 
-	public String joinLokaal(String studentNaam, int lokaalNr, Provo provo, PuntenTelling puntenTelling) {
+	public Deelnemer joinLokaal(String studentNaam, int lokaalNr, PuntenTelling puntenTelling) {
 		Lokaal l = getLokaal(lokaalNr);
-		return l.joinLokaal(studentNaam, provo, puntenTelling);
+		return l.joinLokaal(studentNaam, puntenTelling);
 	}
 
 	public String getDocentcode() {
@@ -114,7 +105,4 @@ public class Account {
 		return lokalen.get(lokaalNr);
 	}
 
-	public String getStudentID(int lokaalNr, String studentNaam) {
-		return lokalen.get(lokaalNr).getStudentID(studentNaam);
-	}
 }

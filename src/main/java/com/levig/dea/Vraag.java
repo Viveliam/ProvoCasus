@@ -8,6 +8,8 @@ public abstract class Vraag {
 		this.vraag = vraag;
 	}
 
+	public abstract boolean controleerAntwoord(String antwoord);
+
 	public abstract void toonVraag();
 
 }

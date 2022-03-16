@@ -6,11 +6,11 @@ public class Provo {
 	private ArrayList<Account> accounts = new ArrayList<>();
 	private ArrayList<Deelnemer> actieveDeelnemers = new ArrayList<>();
 
-	public void voerGegevensIn(String mailadres, String voornaam, String achternaam, String wachtwoord, String organisatie, String accounttype) {
+	public void voerGegevensIn(String mailadres, String voornaam, String achternaam, String wachtwoord, String organisatie, IAccounttypeStrategy accounttype) {
 		accounts.add(new Account(mailadres, voornaam, achternaam, wachtwoord, organisatie, accounttype));
 	}
 
-	public void pasGegevensAan(String mailadres, String voornaam, String achternaam, String wachtwoord, String organisatie, String accounttype) {
+	public void pasGegevensAan(String mailadres, String voornaam, String achternaam, String wachtwoord, String organisatie, IAccounttypeStrategy accounttype) {
 		Account a = getAccount(mailadres);
 		a.pasGegevensAan(voornaam, achternaam, wachtwoord, organisatie, accounttype);
 	}
@@ -44,7 +44,7 @@ public class Provo {
 		a.voegVraagToe(naamToets, vraag, antwoord);
 	}
 
-	public void startKennisToets(String mailadres, String naamToets, int lokaalNr) {
+	public void startKennisToets(String mailadres, String naamToets) {
 		Account a = getAccount(mailadres);
 		a.startKennisToets(naamToets);
 	}
@@ -55,8 +55,10 @@ public class Provo {
 	}
 
 	public String joinLokaal(String docentCode, String studentNaam, int lokaalNr, PuntenTelling puntenTelling) {
-		Account d = getDocent(docentCode);
-		return d.joinLokaal(studentNaam, lokaalNr, this, puntenTelling);
+		Account a = getDocent(docentCode);
+		Deelnemer d = a.joinLokaal(studentNaam, lokaalNr, puntenTelling);
+		actieveDeelnemers.add(d);
+		return d.getStudentID();
 	}
 
 	public void toonVraag(String studentID, int vraagNr) {
@@ -99,10 +101,6 @@ public class Provo {
 			}
 		}
 		return null; // TODO: Exception maken wanneer student niet gevonden wordt.
-	}
-
-	public void voegDeelnemerToe(Deelnemer deelnemer) {
-		actieveDeelnemers.add(deelnemer);
 	}
 
 	public String getDocentCode(String mailadres) {

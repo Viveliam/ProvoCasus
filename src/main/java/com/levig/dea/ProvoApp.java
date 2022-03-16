@@ -13,7 +13,7 @@ public class ProvoApp {
         String naamToets = "VoorbeeldToets";
 
         // Maak toets
-        provo.voerGegevensIn(docentMail, "Sjaak", "Snel", "abcdef", "HAN", "Basis");
+        provo.voerGegevensIn(docentMail, "Sjaak", "Snel", "abcdef", "HAN", new BasisAccounttypeStrategy());
         provo.maakKennisToetsAan(docentMail, naamToets, 1800);
         provo.voegVraagToe(docentMail, naamToets,
                 "Welke van de begrippen needs, features en requirements horen bij het solution domain?",
@@ -41,7 +41,7 @@ public class ProvoApp {
         // Start toets
         String docentCode = provo.getDocentCode(docentMail);
         int lokaalNr = 0;
-        provo.startKennisToets(docentMail, naamToets, lokaalNr);
+        provo.startKennisToets(docentMail, naamToets);
 
         // Join toets
         String studentNaam = "Klaasjan123";
