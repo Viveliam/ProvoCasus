@@ -1,4 +1,4 @@
-package com.levig.dea;
+package com.levig.dea.provo.toets;
 
 public class Juistonjuistvraag extends Vraag {
 
@@ -9,12 +9,14 @@ public class Juistonjuistvraag extends Vraag {
         juistAntwoord = new Antwoord(antwoord);
     }
 
+    @Override
     public boolean controleerAntwoord(String antwoord) {
         if (antwoord == juistAntwoord.getAntwoord()) {
             return true;
         } return false;
     }
 
+    @Override
     public void toonVraag() {
         System.out.println(vraag);
         System.out.println("Juist");

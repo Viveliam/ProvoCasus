@@ -1,4 +1,10 @@
-package com.levig.dea;
+package com.levig.dea.provo.account;
+
+import com.levig.dea.provo.uitvoering.Deelnemer;
+import com.levig.dea.provo.toets.Kennistoets;
+import com.levig.dea.provo.uitvoering.IPuntenTelling;
+import com.levig.dea.provo.uitvoering.Lokaal;
+import com.levig.dea.provo.uitvoering.TijdPuntenTelling;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicLong;
@@ -50,20 +56,11 @@ public class Account {
 		kennistoetsen.add(new Kennistoets(naamToets, tijdslimiet));
 	}
 
-	public void voegVraagToe(String naamToets, String vraag, ArrayList<String> antwoorden, int juistAntwoord) {
+	public void voegVraagToe(String naamToets, String soortVraag, String vraag, ArrayList<String> antwoorden, int juistAntwoord) {
 		Kennistoets k = getKennistoets(naamToets);
-		k.voegVraagToe(vraag, antwoorden, juistAntwoord);
+		k.voegVraagToe(soortVraag, vraag, antwoorden, juistAntwoord);
 	}
 
-	public void voegVraagToe(String naamToets, String vraag, ArrayList<String> antwoorden) {
-		Kennistoets k = getKennistoets(naamToets);
-		k.voegVraagToe(vraag, antwoorden);
-	}
-
-	public void voegVraagToe(String naamToets, String vraag, String antwoord) {
-		Kennistoets k = getKennistoets(naamToets);
-		k.voegVraagToe(vraag, antwoord);
-	}
 
 	public String getMailadres(){
 		return mailadres;
@@ -92,7 +89,7 @@ public class Account {
 		}
 	}
 
-	public Deelnemer joinLokaal(String studentNaam, int lokaalNr, PuntenTelling puntenTelling) {
+	public Deelnemer joinLokaal(String studentNaam, int lokaalNr, IPuntenTelling puntenTelling) {
 		Lokaal l = getLokaal(lokaalNr);
 		return l.joinLokaal(studentNaam, puntenTelling);
 	}

@@ -1,4 +1,7 @@
-package com.levig.dea;
+package com.levig.dea.provo.uitvoering;
+
+import com.levig.dea.provo.toets.Kennistoets;
+import com.levig.dea.provo.toets.Vraag;
 
 import java.util.ArrayList;
 
@@ -21,7 +24,7 @@ public class Lokaal {
 		}
 	}
 
-	public Deelnemer joinLokaal(String studentNaam, PuntenTelling puntenTelling) {
+	public Deelnemer joinLokaal(String studentNaam, IPuntenTelling puntenTelling) {
 		Deelnemer deelnemer = new Deelnemer(studentNaam, this, puntenTelling);
 		deelnemers.add(deelnemer);
 		return deelnemer;
@@ -43,4 +46,7 @@ public class Lokaal {
 		} return ""; // TODO: Throw exception.
 	}
 
+	public int getAantalVragen() {
+		return kennistoets.getAantalVragen();
+	}
 }

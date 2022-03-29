@@ -1,4 +1,6 @@
-package com.levig.dea;
+package com.levig.dea.provo.toets;
+
+import com.levig.dea.provo.uitvoering.Deelnemer;
 
 public class Antwoord {
 

@@ -1,4 +1,4 @@
-package com.levig.dea;
+package com.levig.dea.provo.toets;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -17,10 +17,12 @@ public class Meerkeuzevraag extends Vraag {
         }
     }
 
+    @Override
     public boolean controleerAntwoord(String antwoord) {
         return Objects.equals(antwoord, antwoorden.get(juistAntwoord).getAntwoord());
     }
 
+    @Override
     public void toonVraag() {
         System.out.println(vraag);
         for (Antwoord antwoord : antwoorden) {

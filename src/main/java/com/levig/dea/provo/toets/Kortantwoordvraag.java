@@ -1,4 +1,4 @@
-package com.levig.dea;
+package com.levig.dea.provo.toets;
 
 import java.util.ArrayList;
 
@@ -14,6 +14,7 @@ public class Kortantwoordvraag extends Vraag {
         }
     }
 
+    @Override
     public boolean controleerAntwoord(String antwoord) {
         for (Antwoord juistAntwoord : juisteAntwoorden) {
             if (antwoord == juistAntwoord.getAntwoord()) {
@@ -23,6 +24,7 @@ public class Kortantwoordvraag extends Vraag {
         return false;
     }
 
+    @Override
     public void toonVraag() {
         System.out.println(vraag);
     }

@@ -1,4 +1,10 @@
-package com.levig.dea;
+package com.levig.dea.provo;
+
+import com.levig.dea.provo.account.Account;
+import com.levig.dea.provo.account.IAccounttypeStrategy;
+import com.levig.dea.provo.uitvoering.Deelnemer;
+import com.levig.dea.provo.uitvoering.IPuntenTelling;
+import com.levig.dea.provo.uitvoering.TijdPuntenTelling;
 
 import java.util.ArrayList;
 
@@ -29,19 +35,9 @@ public class Provo {
 		a.maakKennistoetsAan(naamToets, tijdslimiet);
 	}
 
-	public void voegVraagToe(String mailadres, String naamToets, String vraag, ArrayList<String> antwoorden, int juistAntwoord) {
+	public void voegVraagToe(String mailadres, String naamToets, String soortVraag, String vraag, ArrayList<String> antwoorden, int juistAntwoord) {
 		Account a = getAccount(mailadres);
-		a.voegVraagToe(naamToets, vraag, antwoorden, juistAntwoord);
-	}
-
-	public void voegVraagToe(String mailadres, String naamToets, String vraag, ArrayList<String> antwoorden) {
-		Account a = getAccount(mailadres);
-		a.voegVraagToe(naamToets, vraag, antwoorden);
-	}
-
-	public void voegVraagToe(String mailadres, String naamToets, String vraag, String antwoord) {
-		Account a = getAccount(mailadres);
-		a.voegVraagToe(naamToets, vraag, antwoord);
+		a.voegVraagToe(naamToets, soortVraag, vraag, antwoorden, juistAntwoord);
 	}
 
 	public void startKennisToets(String mailadres, String naamToets) {
@@ -54,7 +50,7 @@ public class Provo {
 		a.maakOverzicht(lokaalNr);
 	}
 
-	public String joinLokaal(String docentCode, String studentNaam, int lokaalNr, PuntenTelling puntenTelling) {
+	public String joinLokaal(String docentCode, String studentNaam, int lokaalNr, IPuntenTelling puntenTelling) {
 		Account a = getDocent(docentCode);
 		Deelnemer d = a.joinLokaal(studentNaam, lokaalNr, puntenTelling);
 		actieveDeelnemers.add(d);
@@ -106,6 +102,11 @@ public class Provo {
 	public String getDocentCode(String mailadres) {
 		Account a = getAccount(mailadres);
 		return a.getDocentcode();
+	}
+
+	public int getAantalVragen(String studentID) {
+		Deelnemer student = getStudent(studentID);
+		return student.getAantalVragen();
 	}
 
 }

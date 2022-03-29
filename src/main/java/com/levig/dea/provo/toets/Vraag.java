@@ -1,4 +1,4 @@
-package com.levig.dea;
+package com.levig.dea.provo.toets;
 
 public abstract class Vraag {
 

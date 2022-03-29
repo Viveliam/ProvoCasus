@@ -1,4 +1,4 @@
-package com.levig.dea;
+package com.levig.dea.provo.toets;
 
 import java.util.ArrayList;
 
@@ -7,23 +7,17 @@ public class Kennistoets {
 	private String naamToets;
 	private int tijdslimiet;
 	private ArrayList<Vraag> vragen;
+	private VraagFactory vraagFactory;
 
 	public Kennistoets(String naamToets, int tijdslimiet) {
 		this.naamToets = naamToets;
 		this.tijdslimiet = tijdslimiet;
 		vragen = new ArrayList<>();
+		vraagFactory = new VraagFactory();
 	}
 
-	public void voegVraagToe(String vraag, ArrayList<String> antwoorden, int juistAntwoord) {
-		vragen.add(new Meerkeuzevraag(vraag, antwoorden, juistAntwoord));
-	}
-
-	public void voegVraagToe(String vraag, ArrayList<String> antwoorden) {
-		vragen.add(new Kortantwoordvraag(vraag, antwoorden));
-	}
-
-	public void voegVraagToe(String vraag, String antwoord) {
-		vragen.add(new Juistonjuistvraag(vraag, antwoord));
+	public void voegVraagToe(String soortVraag, String vraag, ArrayList<String> antwoorden, int juistAntwoord) {
+		vragen.add(vraagFactory.createVraag(soortVraag, vraag, antwoorden, juistAntwoord));
 	}
 
 	public String getNaamToets(){
@@ -39,5 +33,7 @@ public class Kennistoets {
 		vraag.toonVraag();
 	}
 
-
+	public int getAantalVragen() {
+		return vragen.size();
+	}
 }

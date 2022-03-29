@@ -1,4 +1,7 @@
-package com.levig.dea;
+package com.levig.dea.provo.uitvoering;
+
+import com.levig.dea.provo.toets.Antwoord;
+import com.levig.dea.provo.toets.Vraag;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicLong;
@@ -9,12 +12,12 @@ public class Deelnemer {
 	private String studentID;
 	private int aantalCorrect;
 	private int resterendeTijd;
-	private PuntenTelling puntenTelling;
+	private IPuntenTelling puntenTelling;
 	private Lokaal lokaal;
 	private ArrayList<Antwoord> antwoorden;
 	private static AtomicLong idCounter = new AtomicLong();
 
-	public Deelnemer(String studentNaam, Lokaal lokaal, PuntenTelling puntenTelling) {
+	public Deelnemer(String studentNaam, Lokaal lokaal, IPuntenTelling puntenTelling) {
 		this.studentNaam = studentNaam;
 		this.lokaal = lokaal;
 		this.puntenTelling = puntenTelling;
@@ -27,19 +30,10 @@ public class Deelnemer {
 	}
 
 	public void printResultaat() {
-		berekenAantalCorrect();
+		ArrayList<String> resultaten = puntenTelling.berekenResultaten(antwoorden, resterendeTijd);
 		System.out.println(	"Student: " + studentNaam +
-							" Aantal Correct = " + aantalCorrect +
-							" Score = " + puntenTelling.getPunten(aantalCorrect, resterendeTijd));
-	}
-
-	private void berekenAantalCorrect() {
-		aantalCorrect = 0;
-		for (Antwoord a : antwoorden) {
-			if (a.controleerAntwoord()){
-				aantalCorrect++;
-			}
-		}
+							" Aantal Correct = " + resultaten.get(0) +
+							" Score = " + resultaten.get(1));
 	}
 
 	public void toonVraag(int vraagNr) {
@@ -59,4 +53,7 @@ public class Deelnemer {
 		return studentNaam;
     }
 
+	public int getAantalVragen() {
+		return lokaal.getAantalVragen();
+	}
 }
