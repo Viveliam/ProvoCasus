@@ -40,9 +40,9 @@ public class Provo {
 		a.voegVraagToe(naamToets, soortVraag, vraag, antwoorden, juistAntwoord);
 	}
 
-	public void startKennisToets(String mailadres, String naamToets) {
+	public int startKennisToets(String mailadres, String naamToets) {
 		Account a = getAccount(mailadres);
-		a.startKennisToets(naamToets);
+		return a.startKennisToets(naamToets);
 	}
 
 	public void maakOverzicht(String mailadres, int lokaalNr) {
@@ -77,8 +77,7 @@ public class Provo {
 			if (account.getMailadres() == mailadres) {
 				return account;
 			}
-		}
-		return null; // TODO: Exception maken wanneer account niet gevonden wordt.
+		} throw new ProvoException("Account kon niet gevonden worden.");
 	}
 
 	private Account getDocent(String docentcode) {
@@ -86,8 +85,7 @@ public class Provo {
 			if (account.getDocentcode() == docentcode) {
 				return account;
 			}
-		}
-		return null; // TODO: Exception maken wanneer account niet gevonden wordt.
+		} throw new ProvoException("Docent kon niet gevonden worden.");
 	}
 
 	private Deelnemer getStudent(String studentID){
@@ -95,8 +93,7 @@ public class Provo {
 			if (student.getStudentID() == studentID) {
 				return student;
 			}
-		}
-		return null; // TODO: Exception maken wanneer student niet gevonden wordt.
+		} throw new ProvoException("Student kon niet gevonden worden.");
 	}
 
 	public String getDocentCode(String mailadres) {

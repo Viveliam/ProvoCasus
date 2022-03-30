@@ -17,7 +17,7 @@ public class Kortantwoordvraag extends Vraag {
     @Override
     public boolean controleerAntwoord(String antwoord) {
         for (Antwoord juistAntwoord : juisteAntwoorden) {
-            if (antwoord == juistAntwoord.getAntwoord()) {
+            if (antwoord.equals(juistAntwoord.getAntwoord())) {
                 return true;
             }
         }

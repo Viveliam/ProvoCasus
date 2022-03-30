@@ -43,15 +43,12 @@ public class Deelnemer {
 	public void beantwoordVraag(int vraagNr, String antwoord) {
 		Vraag v = lokaal.getVraag(vraagNr);
 		antwoorden.add(new Antwoord(this, v, antwoord));
+		printResultaat();
 	}
 
 	public String getStudentID(){
 		return studentID;
 	}
-
-    public String getNaam() {
-		return studentNaam;
-    }
 
 	public int getAantalVragen() {
 		return lokaal.getAantalVragen();

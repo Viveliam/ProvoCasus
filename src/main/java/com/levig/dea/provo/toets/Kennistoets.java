@@ -30,6 +30,7 @@ public class Kennistoets {
 
 	public void toonVraag(int vraagNr) {
 		Vraag vraag = vragen.get(vraagNr);
+		System.out.println("Vraag " + (vraagNr + 1) + " van de " + vragen.size());
 		vraag.toonVraag();
 	}
 

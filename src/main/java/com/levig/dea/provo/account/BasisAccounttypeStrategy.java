@@ -1,5 +1,6 @@
 package com.levig.dea.provo.account;
 
+import com.levig.dea.provo.ProvoException;
 import com.levig.dea.provo.uitvoering.Lokaal;
 
 public class BasisAccounttypeStrategy implements IAccounttypeStrategy {
@@ -10,7 +11,6 @@ public class BasisAccounttypeStrategy implements IAccounttypeStrategy {
     public Lokaal nieuwLokaal(int huidigeAantalLokalen) {
         if (huidigeAantalLokalen < maxAantalLokalen) {
             return new Lokaal();
-        }
-        return null; // TODO: Exception gooien
+        } else throw new ProvoException("Het maximale aantal lokalen is al bereikt.");
     }
 }

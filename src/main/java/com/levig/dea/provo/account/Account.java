@@ -1,5 +1,6 @@
 package com.levig.dea.provo.account;
 
+import com.levig.dea.provo.ProvoException;
 import com.levig.dea.provo.uitvoering.Deelnemer;
 import com.levig.dea.provo.toets.Kennistoets;
 import com.levig.dea.provo.uitvoering.IPuntenTelling;
@@ -71,14 +72,14 @@ public class Account {
 			if (kennistoets.getNaamToets() == naamToets) {
 				return kennistoets;
 			}
-		}
-		return null; // TODO: Exception maken wanneer toets niet gevonden wordt.
+		} throw new ProvoException("De gegeven toets kon niet gevonden worden");
 	}
 
-	public void startKennisToets(String naamToets) {
+	public int startKennisToets(String naamToets) {
 		Lokaal l = accounttype.nieuwLokaal(lokalen.size());
 		lokalen.add(l);
 		l.startKennisToets(getKennistoets(naamToets));
+		return lokalen.indexOf(l);
 	}
 
 	public void maakOverzicht(int lokaalNr) {

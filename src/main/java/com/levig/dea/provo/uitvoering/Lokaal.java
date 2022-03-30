@@ -38,14 +38,6 @@ public class Lokaal {
 		kennistoets.toonVraag(vraagNr);
 	}
 
-	public String getStudentID(String studentNaam) {
-		for (Deelnemer deelnemer : deelnemers) {
-			if (deelnemer.getNaam() == studentNaam){
-				return deelnemer.getStudentID();
-			}
-		} return ""; // TODO: Throw exception.
-	}
-
 	public int getAantalVragen() {
 		return kennistoets.getAantalVragen();
 	}

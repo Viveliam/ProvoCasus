@@ -11,7 +11,7 @@ public class Juistonjuistvraag extends Vraag {
 
     @Override
     public boolean controleerAntwoord(String antwoord) {
-        if (antwoord == juistAntwoord.getAntwoord()) {
+        if (antwoord.equals(juistAntwoord.getAntwoord())) {
             return true;
         } return false;
     }

@@ -54,6 +54,7 @@ public class ProvoApp {
         String docentCode = provo.getDocentCode(docentMail);
         int lokaalNr = 0;
         provo.startKennisToets(docentMail, naamToets);
+        System.out.println("Beantwoord de vragen door het hele antwoord te typen/kopiëren.");
 
         // Join toets
         String studentNaam = "Klaasjan123";
